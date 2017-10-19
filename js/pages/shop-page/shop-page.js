@@ -7,10 +7,14 @@ class ShopPage {
 
     this._render();
 
-
-    new PhoneCatalogue({
-      element: this._element.querySelector('[data-component="phoneCatalogue"]'),
-    });
+    fetch('data/phones.json')
+      .then(resp => resp.json())
+      .then(phones => {
+        new PhoneCatalogue({
+          element: this._element.querySelector('[data-component="phoneCatalogue"]'),
+          phones
+        });
+      })
   }
 
   _render() {
